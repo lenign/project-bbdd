@@ -19,7 +19,7 @@ function obtenerPlatosPorFecha($conn, $fecha) {
     return $result;
 }
 
-// Consulta 3: Listar todos los platos de cada menú con sus acompañantes
+// Consulta 3: Listar todos los platos de cada menú con sus acompañantes y fecha de creación del menú
 function obtenerPlatosYAcompanantes($conn) {
     $sql = "SELECT m.codigo_menu, m.descripcion, m.fecha_creacion, p.codigo_plato, p.nombre_plato, 
                    a.codigo_acompanante, a.nombre_acompanante
