@@ -29,6 +29,7 @@ $resultado = obtenerPlatosYAcompanantes($conn);
                 <thead>
                     <tr>
                         <th>Menú</th>
+                        <th>Fecha de creación</th>
                         <th>Plato</th>
                         <th>Acompañantes</th>
                     </tr>
@@ -37,38 +38,35 @@ $resultado = obtenerPlatosYAcompanantes($conn);
                     <?php
                     $current_menu = "";
                     $current_plato = "";
+                    $current_fecha = "";
                     $acompanantes = array();
                     
                     while ($row = $resultado->fetch_assoc()):
-                        if ($current_menu != $row['descripcion']) {
-                            // Mostrar nueva fila para el menú
+                        if ($current_menu != $row['descripcion'] || $current_fecha != $row['fecha_creacion']) {
                             if ($current_menu != "") {
-                                // Mostrar el plato anterior con sus acompañantes
                                 echo "<tr>";
                                 echo "<td>$current_menu</td>";
+                                echo "<td>$current_fecha</td>";
                                 echo "<td>$current_plato</td>";
                                 echo "<td>" . implode(", ", $acompanantes) . "</td>";
                                 echo "</tr>";
                             }
-                            
                             $current_menu = $row['descripcion'];
+                            $current_fecha = $row['fecha_creacion'];
                             $current_plato = $row['nombre_plato'];
                             $acompanantes = array();
-                            
                             if ($row['nombre_acompanante']) {
                                 $acompanantes[] = $row['nombre_acompanante'];
                             }
                         } elseif ($current_plato != $row['nombre_plato']) {
-                            // Mostrar el plato anterior con sus acompañantes
                             echo "<tr>";
                             echo "<td>$current_menu</td>";
+                            echo "<td>$current_fecha</td>";
                             echo "<td>$current_plato</td>";
                             echo "<td>" . implode(", ", $acompanantes) . "</td>";
                             echo "</tr>";
-                            
                             $current_plato = $row['nombre_plato'];
                             $acompanantes = array();
-                            
                             if ($row['nombre_acompanante']) {
                                 $acompanantes[] = $row['nombre_acompanante'];
                             }
@@ -78,11 +76,10 @@ $resultado = obtenerPlatosYAcompanantes($conn);
                             }
                         }
                     endwhile;
-                    
-                    // Mostrar el último plato
                     if ($current_menu != "") {
                         echo "<tr>";
                         echo "<td>$current_menu</td>";
+                        echo "<td>$current_fecha</td>";
                         echo "<td>$current_plato</td>";
                         echo "<td>" . implode(", ", $acompanantes) . "</td>";
                         echo "</tr>";

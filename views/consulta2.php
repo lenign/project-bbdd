@@ -49,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fecha'])) {
                             <th>Código</th>
                             <th>Nombre del Plato</th>
                             <th>Precio</th>
+                            <th>Fecha de creación</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,6 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fecha'])) {
                             <td><?php echo $row['codigo_plato']; ?></td>
                             <td><?php echo $row['nombre_plato']; ?></td>
                             <td>L. <?php echo number_format($row['precio_plato'], 2); ?></td>
+                            <td><?php echo $row['fecha_creacion']; ?></td>
                         </tr>
                         <?php endwhile; ?>
                     </tbody>
