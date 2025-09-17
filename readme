@@ -18,3 +18,12 @@ proyecto-manjares/
     ├── consulta4.php        # Vista para consulta 4
     ├── consulta5.php        # Vista para consulta 5
     └── consulta6.php        # Vista para consulta 6
+
+Instrucciones para ejecutar el proyecto:
+
+    # Version de PHP
+    Igual o superior a 8.0
+    
+    # Ejecucion de proyecto
+    php -S localhost:8000
+
