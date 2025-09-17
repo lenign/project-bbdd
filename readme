@@ -1,0 +1,20 @@
+Estructura de proeyecto PHP - Gestión de un Restaurante
+
+proyecto-manjares/
+│
+├── index.php                # Página principal
+├── database.php             # Conexión a la base de datos
+├── consultas.php            # Consultas SQL
+├── css/
+│   └── style.css            # Estilos personalizados
+├── forms/
+│   ├── form_platos.php      # Formulario para platos
+│   ├── form_proveedores.php # Formulario para proveedores
+│   └── form_menus.php       # Formulario para menús
+└── views/
+    ├── consulta1.php        # Vista para consulta 1
+    ├── consulta2.php        # Vista para consulta 2
+    ├── consulta3.php        # Vista para consulta 3
+    ├── consulta4.php        # Vista para consulta 4
+    ├── consulta5.php        # Vista para consulta 5
+    └── consulta6.php        # Vista para consulta 6
