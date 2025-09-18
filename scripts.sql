@@ -181,3 +181,48 @@ BEGIN
     SET NEW.fecha_creacion = NOW();
 END $$
 DELIMITER ;
+
+
+-- Consultas
+-- 1
+SELECT COUNT(*) AS total_platos
+FROM AcompanantePlatos
+WHERE codigo_acompanante = 1;
+
+-- 2
+SELECT p.*
+FROM Platos p
+JOIN MenuPlatos mp ON p.codigo_plato = mp.codigo_plato
+JOIN Menus m ON mp.codigo_menu = m.codigo_menu
+WHERE m.fecha_elaboracion = '2024-05-01';
+
+-- 3
+SELECT m.codigo_menu, m.descripcion, m.fecha_creacion, p.codigo_plato, p.nombre_plato,
+       a.codigo_acompanante, a.nombre_acompanante
+FROM Menus m
+JOIN MenuPlatos mp ON m.codigo_menu = mp.codigo_menu
+JOIN Platos p ON mp.codigo_plato = p.codigo_plato
+LEFT JOIN AcompanantePlatos ap ON p.codigo_plato = ap.codigo_plato
+LEFT JOIN Acompanantes a ON ap.codigo_acompanante = a.codigo_acompanante
+ORDER BY m.codigo_menu, p.codigo_plato;
+
+-- 4
+SELECT m.codigo_menu, m.descripcion, COUNT(mp.codigo_plato) AS cantidad_platos
+FROM Menus m
+LEFT JOIN MenuPlatos mp ON m.codigo_menu = mp.codigo_menu
+GROUP BY m.codigo_menu, m.descripcion;
+
+-- 5
+SELECT p.codigo_proveedor, p.nombre_proveedor, p.direccion, p.rtn, p.telefono, p.ciudad,
+       COUNT(pp.codigo_inventario) AS cantidad_productos
+FROM Proveedores p
+LEFT JOIN ProductoProveedor pp ON p.codigo_proveedor = pp.codigo_proveedor
+GROUP BY p.codigo_proveedor, p.nombre_proveedor, p.direccion, p.rtn, p.telefono, p.ciudad;
+
+-- 6
+SELECT pr.nombre_proveedor, pr.ciudad, p.nombre_producto
+FROM Proveedores pr
+JOIN ProductoProveedor pp ON pr.codigo_proveedor = pp.codigo_proveedor
+JOIN Productos p ON pp.codigo_inventario = p.codigo_inventario
+WHERE pr.ciudad = 'Tegucigalpa'
+ORDER BY pr.nombre_proveedor;
